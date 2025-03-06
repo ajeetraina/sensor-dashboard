@@ -26,12 +26,33 @@ The Neo4j database contains the following node types:
 - **HAS_GAS_CLASS**: Connects SensorReading → Classification (gas level)
 - **BELONGS_TO_TIME_GROUP**: Connects SensorReading → TimeGroup (time period)
 
-## Features
+[View detailed database structure diagram](database_structure.md)
 
-- Fetch and analyze sensor data from Neo4j database
-- Calculate average values for temperature, humidity, and pressure
-- Monitor temperature changes and alert when rising above threshold
-- Visualize sensor data with graphs and charts
+## Project Components
+
+### 1. Sensor Data Fetcher (`sensor_data.py`)
+- Python script to fetch and analyze sensor data from Neo4j
+- Calculates average values for temperature, humidity, and pressure
+- Extracts readings by classification and time groups
+
+### 2. Temperature Alert System (`temperature_alert.py`)
+- Monitors temperature changes in real-time
+- Alerts when temperature rises by a configurable threshold (default: 2°C)
+- Configurable check interval (default: 60 seconds)
+
+### 3. Web Dashboard (`app.py`)
+- Interactive dashboard built with Dash and Plotly
+- Visualizes temperature, humidity, and pressure trends
+- Displays latest sensor readings and average values
+- Auto-refreshes data every minute
+
+### 4. Docker Support
+- Dockerfile for containerizing the application
+- Docker Compose setup for running the dashboard with Neo4j
+
+## Sample Data
+
+[View sample sensor readings](sample_sensor_values.md)
 
 ## Installation
 
@@ -72,8 +93,41 @@ python temperature_alert.py
 python temperature_alert.py 1.5 30
 ```
 
+### Run Web Dashboard
+
+```bash
+python app.py
+```
+
+Then open `http://localhost:8050` in your browser.
+
+### Using Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+This will start both the dashboard and a Neo4j instance.
+
 ## Project Structure
 
-- `sensor_data.py`: Main script to fetch and analyze sensor data
-- `temperature_alert.py`: Temperature monitoring and alert system
-- `requirements.txt`: Required Python packages
+```
+sensor-dashboard/
+├── README.md                  # Project documentation
+├── database_structure.md      # Database diagram and documentation
+├── sample_sensor_values.md    # Sample sensor data
+├── requirements.txt          # Python dependencies
+├── sensor_data.py            # Script to fetch and analyze sensor data
+├── temperature_alert.py      # Temperature monitoring and alert system
+├── app.py                    # Web dashboard application
+├── Dockerfile                # Docker container definition
+└── docker-compose.yml        # Docker Compose configuration
+```
+
+## Future Enhancements
+
+- Add user authentication for the dashboard
+- Implement predictive analytics for sensor readings
+- Create mobile notifications for alerts
+- Add more visualization types and filtering options
+- Support for additional sensor types
