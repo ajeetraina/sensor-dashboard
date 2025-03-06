@@ -1,0 +1,8 @@
+neo4j==5.15.0
+pandas==2.2.0
+numpy==1.26.3
+matplotlib==3.8.2
+dash==2.16.0
+dash-bootstrap-components==1.5.0
+plotly==5.18.0
+flask==3.0.0
